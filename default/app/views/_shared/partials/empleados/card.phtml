@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-3">
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title"><?=$empleados->nombre?></h5>
+                <?= Htmlbs::img("empleados/{$empleados->id}.png", "", ["width"=>"256px"]) ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card" style="width:100%;">
+            <div class="card-body">
+                <h5 class="card-title">Empleado <?=$empleados->id ?></h5>
+                <!-- <h6 class="card-subtitle mb-2 text-muted">< ? = ? ></h6> -->
+                <p class="card-text">
+                <ul>
+                    <li>Email: <?=$empleados->email?></li>
+                    <li>Telefono: <?=$empleados->telefono?> </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="padding-bottom: 20px; padding-top: 20px;">
+    <div class="col-12 text-center">
+        <h1>Tablas de Información</h1>
+    </div>
+</div>

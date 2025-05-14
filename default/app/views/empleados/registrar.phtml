@@ -1,0 +1,88 @@
+
+<style>
+    .error {
+        color: #5a5c69;
+        font-size: 1.7rem;
+        position: relative;
+        line-height: 1.15;
+        width: 60.1rem;
+    }
+</style>
+
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Empleados",  "empleados"); ?>
+    </div>
+</div>
+<br>
+
+<?= Form::open() ?>
+<h2>Empleados</h2>
+
+<div class="row">
+    <div class="col-5">
+        <label>Nombre</label>
+        <?= Formbs::txt('empleado.nombre')?>
+
+        <label>Email</label>
+        <?= Formbs::correo('empleado.email')?>
+
+        <label>Telefono</label>
+        <?= Formbs::numero('empleado.telefono')?>
+
+    </div>
+
+    <div class="col-6">
+        <label>Inserta la imagen del Empleado</label>
+        <input type="file"
+               id="file_input"
+               class="filepond"
+               name="fileup"
+               multiple
+               data-allow-reorder="true"
+               data-max-file-size="3MB"
+               data-max-files="3">
+    </div>
+</div>
+
+<h3><?php View::content(); ?></h3>
+<br>
+<?= View::partial("botones/Btn_Form", null)?>
+
+<?= Form::close() ?>
+
+<script type="text/javascript">
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview
+    );
+
+    // 3. Configurar FilePond
+    const pond = FilePond.create(
+        document.querySelector('#file_input'), {
+            allowMultiple: false,            // Solo 1 archivo
+            instantUpload: true,             // Subida automática
+            imagePreviewHeight: 170,         // Vista previa bonita
+            server: {
+                process: {
+                    url: '<?=URL_APP?>/empleados/subir/empleados/90',     // Tu endpoint PHP
+                    method: 'POST',
+                    // Agrega estos parámetros importantes
+                    timeout: 7000,
+                    ondata: (formData) => {
+                        // Agrega campo adicional si lo necesitas
+                        formData.append('campo_extra', 'valor');
+                        return formData;
+                    },
+                    onload: (response) => {
+                        console.log('Respuesta completa:', response);
+                        return response; // Asegúrate de devolver la respuesta
+                    },
+                    onerror: (error) => {
+                        console.error('Error detallado:', error);
+                    }
+                }
+            }
+        });
+</script>

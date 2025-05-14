@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-3">
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title"><strong>Imagen del producto <?=$productos->id?></strong></h5>
+                <?= Htmlbs::img("productos/{$productos->id}.png", "", ["width"=>"256px"]) ?>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <h5 class="card-title"><strong>Producto <?=$productos->id?></strong></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Características</h6>
+                <p class="card-text">
+                <ul>
+                    <li>Nombre: <?=$productos->nombre?></li>
+                    <li>Precio: <?=$productos->precio?></li>
+                    <li>Stock: <?=$productos->stock?></li>
+                    <li>Categoria: <?=$productos->getCategoria()->nombre?></li>
+                </ul>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

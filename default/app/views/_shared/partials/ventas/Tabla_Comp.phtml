@@ -1,0 +1,24 @@
+<?php if($venta != null): ?>
+    <table class="table table-striped table-hover myTable">
+        <thead>
+        <tr>
+            <th>Cant</th>
+            <th>Descripción</th>
+            <th>Unitario</th>
+            <th>Importe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($venta->getdetalleventa() as $i): ?>
+            <tr>
+                <td><?=$i->cantidad?></td>
+                <td><?=$i->descripcion?></td>
+                <td><?=$i->unitario?></td>
+                <td><?=$i->importe?></td>
+            </tr>
+        <?php endforeach; ?>
+
+        </tbody>
+    </table>
+
+<?php endif; ?>

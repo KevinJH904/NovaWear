@@ -1,0 +1,59 @@
+
+<style>
+    .error {
+        color: #5a5c69;
+        font-size: 1.7rem;
+        position: relative;
+        line-height: 1.15;
+        width: 60.1rem;
+    }
+</style>
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Productos",  "productos"); ?>
+    </div>
+</div>
+
+<br>
+
+<!--Fomulario para el Registro de Productos!-->
+
+<label><?= View::content(); ?></label>
+
+<h2>Productos</h2>
+<?= Form::open() ?>
+
+<div class="row">
+    <div class="col-4">
+        <label>Nombre</label>
+        <?= Formbs::txt('producto.nombre')?>
+
+        <label>Precio al Público</label>
+        <?= Formbs::numero('producto.precio')?>
+
+    </div>
+    <div class="col-4">
+
+        <label>Existencias (Stock)</label>
+        <?= Formbs::numero('producto.stock')?>
+
+        <label>Categoria</label>
+        <?= Formbs::seleccion("producto.categorias_id", "Categorías", $cats)?>
+
+
+
+    </div>
+    <div class="col-4">
+        <label>Inserta la imagen del producto</label>
+        <input type="file" FilePond="1" data-max-files="1"/>
+    </div>
+</div>
+<br>
+
+<?= View::partial("botones/Btn_Form", null)?>
+
+
+
+<?= Form::close() ?>

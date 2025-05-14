@@ -1,0 +1,18 @@
+<table class="table table-sm table-hover">
+    <thead>
+    <tr>
+        <th>Empleado</th>
+        <th>Cantidad de Ventas</th>
+        <th>Ganancias Generadas ($)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($empleados2 as $em): ?>
+        <tr>
+            <td><?= $em->nombre ?></td>
+            <td><?= $ventas_por_empleado2[$em->id] ?></td>
+            <td>$<?= number_format($ganancias_por_empleado2[$em->id], 2) ?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

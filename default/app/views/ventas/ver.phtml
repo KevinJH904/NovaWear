@@ -1,0 +1,237 @@
+<h2>Acciones</h2>
+
+<div class="row">
+
+    <div class="col-1">
+        <?= Formbs::link_regresar("Ventas",  "ventas"); ?>
+    </div>
+</div>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <h4 class="text-primary text-uppercase mb-1">
+                            Venta <?=$ventas->id?>:</h4>
+                        <br>
+                        <h6 class="card-title">Cliente: <?=$ventas->getcliente()->nombre?></h6>
+                        <h6 class="card-title">Empleado: <?=$ventas->getvendedor()->nombre?></h6>
+                        <h6 class="card-title">Método de Pago: <?=$ventas->getmetodoP()->nombre?></h6>
+                        <h6 class="card-title">Total: $<?=$ventas->total?></h6>
+                    </div>
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <h4 class="text-primary text-uppercase mb-1">
+                            Detalles de la Venta:</h4>
+                        <br>
+                        <h6 class="card-title">Total: $<?=$ventas->total?></h6>
+                        <h6 class="card-title">Por Pagar: $<?=$ventas->por_pagar?></h6>
+                        <h6 class="card-title">Comentario: <?=$ventas->comentario?></h6>
+                        <h6 class="card-title">Cancelada: <?=$ventas->cancelada?></h6>
+                    </div>
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <h2>Tablas de Información</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Id de la Venta</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($ventas->getdetalleventa() as $v): ?>
+                <tr>
+                    <td><?= $v-> id?></td>
+                    <td><?= $v-> getVenta()->id?></td> <!---->
+                    <td><?= $v-> getProducto()->nombre?></td> <!--getClientes()-->
+
+                    <td><?= $v-> cantidad?></td>
+                    <td><?= $v-> subtotal?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-1"></div>
+    <div class="col-4 text-center">
+        <h3>Adeudo</h3>
+        <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th>Total de la Venta</th>
+                <th>Por Pagar</th>
+                <th>Pagado</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>$<?= $ventas-> total?></td>
+                    <td>$<?= $ventas-> total - $ventas->por_pagar?></td> <!--getClientes()-->
+                    <td>$<?= $ventas-> por_pagar?></td> <!---->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card border-left-secondary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <h5 class="text-primary text-uppercase mb-1">
+                                    Estado de la Venta:</h5>
+                                <br>
+                                <h4 class="card-title"><?= $ventas->cancelado ? 'Activo' : 'Cancelado' ?></h4>
+
+                            </div>
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+
+<br>
+<div class="row">
+    <div class="col-12 text-center">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="col-3"></div>
+    <div class="col-6">
+        <div class="row">
+            <div class="col-6">
+                <h4 class="text-center">Comparación de Venta Específica vs. Total de Ventas</h4>
+
+                <canvas id="ventasChart"></canvas>
+
+            </div>
+            <div class="col-6">
+                <h4 class="text-center">Porcentaje de Pagado</h4>
+                <br>
+
+                <canvas id="Pagado"></canvas>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-6">
+                <h2 class="text-center">Distribución de Categorías en la Venta</h2>
+
+                <canvas id="categoriasChart"></canvas>
+
+                <script>
+                    var ctx = document.getElementById('categoriasChart').getContext('2d');
+                    var categoriasChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: <?= $categorias ?>,
+                            datasets: [{
+                                data: <?= $cantidades ?>,
+                                backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff'],
+                                hoverBackgroundColor: ['#ff4c6d', '#2f8adf', '#ffb84d', '#3fa7a2', '#8052ff']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    var ctx = document.getElementById('ventasChart').getContext('2d');
+    var ventasChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Venta Específica', 'Total de Ventas Generales'],
+            datasets: [{
+                data: [<?= $total_venta ?>, <?= $total_general - $total_venta ?>],
+                backgroundColor: ['#ff6384', '#36a2eb'],
+                hoverBackgroundColor: ['#ff4c6d', '#2f8adf']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('Pagado').getContext('2d');
+    var Pagado = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Pagado', 'Por Pagar'],
+            datasets: [{
+                data: [<?= $ventas->total - $ventas->por_pagar ?>, <?= $ventas->por_pagar?>],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(255, 159, 64, 0.7)',
+                ],
+                hoverBackgroundColor: [
+                    'rgba(47, 158, 158, 0.9)',  // Verde agua oscuro (25% más oscuro)
+                    'rgba(214, 130, 48, 0.9)',   // Naranja oscuro (15% más oscuro)
+                ],
+
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>

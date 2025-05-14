@@ -1,0 +1,84 @@
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=URL_APP?>/index">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Nova Wear</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?=URL_APP?>/index">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Inicio</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Pestañas
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item active">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+           aria-controls="collapsePages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Páginas</span>
+        </a>
+        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Detalles de Ventas:</h6>
+                <?= Htmlbs::link_app("Ventas", "ventas", $alt = '', $attrs = ["class" => "collapse-item"]) ?>
+                <?= Htmlbs::link_app("Productos", "productos", $alt = '', $attrs = ["class" => "collapse-item"]) ?>
+                <?= Htmlbs::link_app("Detalles Ventas", "detallesVentas", $alt = '', $attrs = ["class" => "collapse-item"]) ?>
+                <h6 class="collapse-header">Ventas:</h6>
+                <?= Htmlbs::link_app("Clientes", "clientes", $alt = '', $attrs = ["class" => "collapse-item"]) ?>
+                <?= Htmlbs::link_app("Empleados", "empleados", $alt = '', $attrs = ["class" => "collapse-item"]) ?>
+                <?= Htmlbs::link_app("Metodos de Pago", "metodosPago", $alt = '', $attrs = ["class" => "collapse-item"]) ?>
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Productos:</h6>
+                <?= Htmlbs::link_app("Categorías", "categorias", $alt = '', $attrs = ["class" => "collapse-item"]) ?>
+                <!--<a class="collapse-item active" href="blank.html">Blank Page</a>-->
+            </div>
+        </div>
+    </li>
+
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Información
+    </div>
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?=URL_APP?>/AcercaDe">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Acerca de </span>
+        </a>
+    </li>
+
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+
+</ul>
+<!-- End of Sidebar -->

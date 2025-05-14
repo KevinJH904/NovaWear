@@ -1,0 +1,21 @@
+<h2 class="text-center">Métricas de Empleados</h2>
+
+<table class="table table-sm table-hover">
+    <thead>
+    <tr class="text-center">
+        <th>Empleados Activos</th>
+        <th>Más Ventas</th>
+        <th>Total de Ventas</th>
+        <th>Promedio Ventas</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center">
+            <td class="text-center"><?= $cantidad_empleados ?></td>
+            <td><?= $empleado_mas_ventas ?></td>
+            <td>$<?= array_sum($ventas_por_empleado) ?></td>
+            <td><?= $promedio_ventas?></td>
+        </tr>
+    </tbody>
+</table>
+

@@ -1,0 +1,74 @@
+
+<style>
+    .error {
+        color: #5a5c69;
+        font-size: 1.7rem;
+        position: relative;
+        line-height: 1.15;
+        width: 60.1rem;
+    }
+</style>
+
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Ventas",  "ventas"); ?>
+    </div>
+</div>
+<br>
+
+<?= Form::open() ?>
+<h2>Ventas</h2>
+
+<div class="row">
+    <div class="col-4">
+        <label>Id del cliente *</label>
+        <?= Formbs::seleccion("venta.clientes_id", "Cliente", $clientes)?>
+
+        <label>Id del empleado *</label>
+        <?= Formbs::seleccion("venta.empleados_id", "Empleado", $empleados)?>
+    </div>
+    <div class="col-4">
+        <label>Id del cliente </label>
+        <?= Formbs::numero('venta.usuario_id')?>
+
+        <label>Id del Metodo de Pago *</label>
+        <?= Formbs::seleccion("venta.metodos_pago_id", "Metodo", $metodos)?>
+
+    </div>
+
+    <div class="col-4">
+        <label>Fecha *</label>
+        <?= Formbs::fecha('venta.fecha')?>
+    </div>
+</div>
+<br>
+<h3>Campos Extras</h3>
+
+<div class="row">
+    <div class="col-4">
+        <label>Total</label>
+        <?= Formbs::numeroDouble('venta.total')?>
+
+
+        <label>Por Pagar</label>
+        <?= Formbs::numeroDouble('venta.por_pagar')?>
+    </div>
+
+    <div class="col-4">
+        <label>Comentario</label>
+        <?= Formbs::txt('venta.comentario')?>
+
+
+        <label>cancelada</label>
+        <?= Formbs::numero('venta.cancelada')?>
+    </div>
+
+</div>
+
+<?php View::content(); ?>
+<br>
+<?= View::partial("botones/Btn_Form", null)?>
+
+<?= Form::close() ?>

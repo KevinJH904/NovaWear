@@ -1,0 +1,61 @@
+
+<style>
+    .error {
+        color: #5a5c69;
+        font-size: 1.7rem;
+        position: relative;
+        line-height: 1.15;
+        width: 60.1rem;
+    }
+</style>
+
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Clientes",  "clientes"); ?>
+    </div>
+</div>
+<br>
+
+<?= Form::open() ?>
+<h2>Cliente</h2>
+
+<div class="row">
+    <div class="col-4">
+        <label>Razón Social *</label>
+        <?= Formbs::txt('cliente.nombre')?>
+
+        <label>Email *</label>
+        <?= Formbs::txt('cliente.email')?>
+    </div>
+    <div class="col-4">
+        <label>Telefono *</label>
+        <?= Formbs::numero('cliente.telefono')?>
+
+        <label>Contraseña *</label>
+        <?= Formbs::passwd('cliente.password')?>
+    </div>
+    <div class="col-2">
+        <label>Crédito</label>
+        <?= Formbs::numero('cliente.credito')?>
+
+        <label>Adeudo</label>
+        <?= Formbs::numero('cliente.adeudo')?>
+
+    </div>
+    <div class="col-2">
+        <label>Activo</label>
+        <?= Formbs::numero('cliente.activo')?>
+    </div>
+</div>
+
+<br>
+
+<?php View::content(); ?>
+
+<br>
+
+<?= View::partial("botones/Btn_Form", null)?>
+
+<?= Form::close() ?>

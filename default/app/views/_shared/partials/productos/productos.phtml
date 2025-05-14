@@ -1,0 +1,23 @@
+<table class="table table-sm table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Id de la Venta</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($productos as $pr): ?>
+        <tr>
+            <td><?= $pr-> id?></td>
+            <td><?= $pr-> getVenta()->id?></td> <!---->
+            <td><?= $pr-> getProducto()->nombre?></td> <!--getClientes()-->
+
+            <td><?= $pr-> cantidad?></td>
+            <td><?= $pr-> importe?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

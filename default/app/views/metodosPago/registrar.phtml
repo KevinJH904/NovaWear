@@ -1,0 +1,39 @@
+
+<style>
+    .error {
+        color: #5a5c69;
+        font-size: 1.7rem;
+        position: relative;
+        line-height: 1.15;
+        width: 60.1rem;
+    }
+</style>
+
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Metodos",  "metodosPago"); ?>
+    </div>
+</div>
+<br>
+
+<h2>Método de Pago</h2>
+<?= Form::open() ?>
+
+<div class="row">
+    <div class="col-4">
+        <label>Nombre</label>
+        <?= Formbs::txt('metodo.nombre')?>
+    </div>
+</div>
+<br>
+
+<h3><?php View::content(); ?></h3>
+
+<br>
+<?= View::partial("botones/Btn_Form", null)?>
+
+</div>
+
+<?= Form::close() ?>

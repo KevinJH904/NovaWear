@@ -1,0 +1,14 @@
+<table class="table table-sm table-hover">
+    <thead class="table">
+    <tr>
+        <th>Nombre de la Categoría</th>
+        <th>Ingresos ($)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><?= htmlspecialchars($categorias->nombre) ?></td>
+        <td>$<?= number_format($ingresos_categoria, 2) ?></td>
+    </tr>
+    </tbody>
+</table>

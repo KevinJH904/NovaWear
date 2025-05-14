@@ -1,0 +1,163 @@
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Metodos",  "metodosPago"); ?>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-3">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Metodo de Pago:</div>
+                        <h5 class="card-title"><?=$metodosPago->nombre?></h5>
+                    </div>
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-bottom: 50px">
+    <div class="col-12 text-center" style="margin-bottom: 50px">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="col-1">
+
+    </div>
+    <div class="col-5 text-center">
+        <h3>Cantidad de ventas obtenidas con <?=$metodosPago->nombre?></h3>
+        <br>
+        <!--Tabla de la cantidad de ventas obtenidas con el metodo de pago seleccionado-->
+        <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th>Método de Pago</th>
+                <th>Ventas Realizadas</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?=$metodosPago->nombre?></td>
+                <td><?=$ventas_especifico?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-5 text-center">
+        <h3>Ingresos totales con <?=$metodosPago->nombre?></h3>
+        <br>
+        <!--Tabla de la cantidad de ingresos obtenidas con el metodo de pago seleccionado-->
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Metodo de Pago</th>
+                    <th>Ingresos Totales</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?=$metodosPago->nombre?></td>
+                    <td>$<?=$ingresos_metodo?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1">
+
+    </div>
+    <!--Se completan los 12-->
+
+    <div class="col-1">
+
+    </div>
+    <div class="col-10 text-center">
+        <h3>Detalle de las ventas realizadas por <?=$metodosPago->nombre?></h3>
+        <table class="table table-sm table-hover myTable">
+            <thead>
+            <tr>
+                <th>ID de Venta</th>
+                <th>Fecha de Venta</th>
+                <th>Cliente</th>
+                <th>Método de Pago</th>
+                <th>Total Ingreso ($)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($ventas_detalladas as $venta): ?>
+                <tr>
+                    <td><?= $venta['venta_id'] ?></td>
+                    <td><?= $venta['fecha_venta'] ?></td>
+                    <td><?= htmlspecialchars($venta['cliente_nombre']) ?></td>
+                    <td><?= htmlspecialchars($venta['metodo_pago']) ?></td>
+                    <td>$<?= number_format($venta['total_ingreso'], 2) ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row" style="margin-bottom: 50px">
+    <div class="col-12 text-center">
+        <h2>Gráficos</h2>
+    </div>
+    <div class="col-2">
+
+    </div>
+    <div class="col-4 text-center">
+        <h3>Ventas Generadas</h3>
+        <h4>Otros métodos vs <?=$metodosPago->nombre?></h4>
+        <canvas id="VentasMP"></canvas>
+    </div>
+    <div class="col-4 text-center">
+        <h3>Ingresos Generados</h3>
+        <h4>Otros Métodos vs <?=$metodosPago->nombre?></h4>
+        <canvas id="IngresosMP"></canvas>
+    </div>
+</div>
+
+
+<script>
+    // Datos desde PHP
+
+    // Gráfica de Dona: Métodos de Pago
+    new Chart(document.getElementById('VentasMP').getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: ["Otros Métodos","<?=$metodosPago->nombre?>"],
+            datasets: [{
+                data: [<?=$total_ventas?>,<?=$ventas_especifico?>],
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+            }]
+        },
+        options: { responsive: true }
+    });
+</script>
+
+
+<script>
+    // Datos desde PHP
+
+    // Gráfica de Dona: Métodos de Pago
+    new Chart(document.getElementById('IngresosMP').getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: ["Otros Métodos","<?=$metodosPago->nombre?>"],
+            datasets: [{
+                data: [<?=$ingresos_totales?>,<?=$ingresos_metodo?>],
+                backgroundColor: ['#FFCE56', '#4BC0C0']
+            }]
+        },
+        options: { responsive: true }
+    });
+</script>
+
+
+<a href="/kumbiaphp/default/public/metodosPago" class="btn btn-primary">Ir a Métodos de Pago</a>

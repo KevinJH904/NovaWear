@@ -1,0 +1,33 @@
+<canvas id="ventasChart"></canvas>
+<!--<p></p>-->
+<script>
+    // Datos de ejemplo (pueden venir desde el backend con PHP)
+    const dataVentas = <?= json_encode(array_column($ventas_por_mes, 'total_ingresos')); ?>;
+
+    const labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    //const dataVentas = [500, 700, 800, 650, 900, 1200, 900, 800, 200, 100, 300, 250];
+
+    // Configuración de la gráfica
+    const ctx2 = document.getElementById('ventasChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'bar',  // Tipo de gráfica (barras)
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Ventas en $',
+                data: dataVentas,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

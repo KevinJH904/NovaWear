@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <h4 class="text-center">Otras Categorías vs <?=$categorias->nombre?></h4>
+        <canvas id="Comp" style="width:100%; height:200px;"></canvas>
+    </div>
+</div>
+<script>
+    // Datos desde PHP
+    const categorias = ["Otras Categorías", "<?= htmlspecialchars($categorias->nombre) ?>"];
+    const ventas = [<?= $ventas_otros-$ventas_categoria ?>, <?= $ventas_categoria ?>];
+
+    // Gráfico de Pastel: Comparación de Ventas
+    const chart = new Chart(document.getElementById('Comp').getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: categorias,
+            datasets: [{
+                data: ventas,
+                backgroundColor: ['#FF6384', '#36A2EB']
+                //hidden: [false, true] // Oculta la segunda categoría (Hombres) al cargar
+
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        usePointStyle: true
+                    }
+                }
+            }
+        }
+    });
+
+    // Oculta "Hombres" (segunda categoría) al cargar
+    //chart.toggleDataVisibility(1);
+    //chart.update();
+</script>

@@ -1,0 +1,73 @@
+
+<style>
+    .error {
+        color: #5a5c69;
+        font-size: 1.7rem;
+        position: relative;
+        line-height: 1.15;
+        width: 60.1rem;
+    }
+</style>
+
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Detalles",  "detallesVentas"); ?>
+    </div>
+</div>
+<br>
+
+<?= Form::open() ?>
+<h2>Detalle de la Venta</h2>
+
+<div class="row">
+    <div class="col-2">
+        <label>Id de la venta</label>
+        <?= Formbs::seleccion2("DetVentas.ventas_id", "Id del Venta", $ventas)?>
+
+        <label>Id del producto</label>
+        <?= Formbs::seleccion2("DetVentas.productos_id", "Id del Producto", $productos)?>
+
+    </div>
+
+    <div class="col-5">
+        <div class="row">
+            <div class="col-2">
+                <label>Cantidad</label>
+                <?= Formbs::numero('DetVentas.cantidad')?>
+            </div>
+            <div class="col-2">
+                <label>Unitario</label>
+                <?= Formbs::numero('DetVentas.unitario')?>
+            </div>
+            <div class="col-2">
+                <label>Subtotal</label>
+                <?= Formbs::decimal('DetVentas.subtotal')?>
+            </div>
+            <div class="col-3">
+                <label>Descuento</label>
+                <?= Formbs::numero('DetVentas.descuento')?>
+            </div>
+            <div class="col-3">
+                <label>Importe</label>
+                <?= Formbs::numero('DetVentas.importe')?>
+            </div>
+        </div>
+
+        <label>Descripción</label>
+        <?= Formbs::txt('DetVentas.descripcion')?>
+    </div>
+
+    <div class="col-4">
+
+    </div>
+</div>
+
+<?php View::content(); ?>
+
+<br>
+<?= View::partial("botones/Btn_Form", null)?>
+
+
+<?= Form::close() ?>

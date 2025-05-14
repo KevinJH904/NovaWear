@@ -1,0 +1,45 @@
+
+
+<?php if ($cliente == null):?>
+    <h2>Cliente:</h2>
+<?php endif; ?>
+
+<?php if($cliente == null): ?>
+
+
+    <?= View::partial("ventas/seleccionar_cliente", null, ["clientes" => $AllClientes])?>
+
+<?php endif; ?>
+
+<?php if ($cliente != null):?>
+    <div class="row">
+        <div class="col-1">
+            <h2>Acciones</h2>
+            <?= Formbs::link_regresar("Nueva",  "ventas/nueva"); ?>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-11">
+                    <?= View::partial("ventas/card_cliente", null, ["cliente" => $cliente])?>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<br>
+
+
+
+<div class="row">
+        <!--Formulario-->
+        <div class="col-5">
+            <?= View::partial("ventas/seleccionar_producto", null, ["AllProductos" => $AllProductos])?>
+        </div>
+<?php endif; ?>
+    <!--Tabla -->
+    <div class="col-7">
+        <?= View::partial("ventas/Tabla_Comp", null, ["venta" => $venta])?>
+    </div>
+</div>
+

@@ -1,0 +1,22 @@
+<table class="table table-hover table-sm">
+    <thead>
+    <th>Salidas de Stock</th>
+    <th>Restantes de Stock</th>
+    <th>Alertas de Stock</th>
+    </thead>
+    <tbody>
+    <tr>
+        <td><?= $EST['total_unidades_vendidas']?></td>
+        <td>
+            <?= $productos->stock - $EST['total_unidades_vendidas']?>
+        </td>
+        <td>
+            <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: <?=$productos->stock - $EST['total_unidades_vendidas']?>%;" aria-valuenow="<?=$productos->stock - $EST['total_unidades_vendidas']?>" aria-valuemin="0" aria-valuemax="<?=$productos->stock?>">
+                    <?=$productos->stock - $EST['total_unidades_vendidas']?>%
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

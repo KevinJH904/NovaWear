@@ -1,0 +1,40 @@
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Empleados",  "empleados"); ?>
+    </div>
+</div>
+<br>
+
+<?= View::partial("empleados/card", null, ["empleados" => $empleados])?>
+
+
+<div class="row">
+    <div class="col-6">
+        <h2>Ventas realizadas por este empleado</h2>
+        <?= View::partial("ventas/ventas", null, ["ventas" => $empleados->getVentas()])?>
+
+    </div>
+    <div class="col-6">
+        <h2 class="text-center">Total Ventas por Empleado</h2>
+        <?= View::partial("empleados/tabla", null, ["empleados2"=>$empleados2, "ventas_por_empleado2"=>$ventas_por_empleado2, "ganancias_por_empleado2"=>$ganancias_por_empleado2])?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <?= View::partial("empleados/datos_generales", null, ["cantidad_empleados" => $cantidad_empleados, "empleado_mas_ventas"=>$empleado_mas_ventas, "ventas_por_empleado"=>$ventas_por_empleado, "promedio_ventas"=>$promedio_ventas, "empleadosD"=>$empleadosD])?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <?= View::partial("empleados/dashboard", null, ["cantidad_empleados" => $cantidad_empleados, "empleado_mas_ventas"=>$empleado_mas_ventas, "ventas_por_empleado"=>$ventas_por_empleado, "promedio_ventas"=>$promedio_ventas, "empleadosD"=>$empleadosD])?>
+    </div>
+</div>
+
+
+
+
+<a href="/kumbiaphp/default/public/empleados" class="btn btn-primary">Ir a Empleados</a>

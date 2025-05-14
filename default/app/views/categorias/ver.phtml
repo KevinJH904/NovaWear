@@ -1,0 +1,74 @@
+<h2>Acciones</h2>
+
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Categorias",  "categorias"); ?>
+    </div>
+</div>
+<br>
+<h1>No. <?= $categorias->id?></h1>
+
+<ul>
+    <li><?=$categorias->nombre?></li>
+</ul>
+
+<table class="table table-sm table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Categoría</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($categorias->getProductos() as $cat): ?>
+        <tr>
+            <td><?= $cat-> id?></td>
+            <td><?= $cat-> nombre?></td>
+            <td><?= $cat-> precio?></td> <!--getClientes()-->
+
+            <td><?= $cat-> stock?></td>
+            <td><?= $cat-> getcategoria()->nombre?></td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<h2 class="text-center">Dashboard de Categoría: <?= htmlspecialchars($categorias->nombre) ?></h2>
+
+
+<!-- Tabla: Ventas de la Categoría -->
+<div class="row">
+    <div class="col-6">
+        <h4 class="text-center">Ventas de la Categoría</h4>
+        <?= View::partial("categorias/VentasCat", null, ["categorias" => $categorias, "ingresos_categoria"=>$ingresos_categoria])?>
+
+    </div>
+
+    <!-- Tabla: Stock General de la Categoría -->
+    <div class="col-6">
+        <h4 class="text-center">Stock General de la Categoría</h4>
+        <?= View::partial("categorias/StockCat", null, ["categorias" => $categorias, "stock_categoria"=>$stock_categoria])?>
+
+    </div>
+</div>
+
+<!-- Gráfico de Pastel -->
+<div class="row justify-content-center">
+    <div class="col-12">
+        <h2 class="text-center">Gráficos de : <?= htmlspecialchars($categorias->nombre) ?></h2>
+    </div>
+    <div class="col-6" >
+        <h3 class="text-center">Ventas</h3>
+        <?= View::partial("categorias/GraficaVent", null, ["categorias" => $categorias, "ventas_otros"=>$ventas_otros, "ventas_categoria"=>$ventas_categoria])?>
+    </div>
+    <div class="col-6">
+        <h3 class="text-center">Ingresos</h3>
+        <?= View::partial("categorias/ComparaCat", null, ["categorias" => $categorias, "ingresos_otros"=>$ingresos_otros, "ingresos_categoria"=>$ingresos_categoria])?>
+    </div>
+</div>
+
+
+<a href="/kumbiaphp/default/public/categorias" class="btn btn-primary">Ir a Categorías</a>

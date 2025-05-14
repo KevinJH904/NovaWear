@@ -1,0 +1,15 @@
+<form method="post">
+    <label class="control-label">Producto</label>
+    <div class="row">
+        <div class="col-6">
+            <select name="producto_id" class="form-control" id="single">
+                <?php foreach ($AllProductos as $p):?>
+                    <option value="<?=$p->id?>"><?=$p->nombre?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-1">
+            <button class="btn btn-success">Seleccionar</button>
+        </div>
+    </div>
+</form>
