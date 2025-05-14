@@ -5,13 +5,13 @@
  */
 return [
     'development' => [
-        'host'     => '127.0.0.1',
-        'username' => 'web', //no es recomendable usar el usuario root
-        'password' => '123456789',
+        'host'     => 'db-mysql-sfo3-58066-do-user-18079590-0.m.db.ondigitalocean.com',
+        'username' => 'doadmin', //no es recomendable usar el usuario root
+        'password' => 'AVNS_6-KQujFcvyFYZv3VV7X',
         'name'     => 'PuntoVenta',
         'type'     => 'mysql',
         'charset'  => 'utf8',
-        'port' => '3307',
+        'port' => '25060',
         /**
          * dsn: Cadena de conexión a la base de datos
          */
@@ -26,29 +26,13 @@ return [
         /**
          * host: ip o nombre del host de la base de datos
          */
-        'host'     => '127.0.0.1',
-        /**
-         * username: usuario con permisos en la base de datos
-         */
-        'username' => 'web', //no es recomendable usar el usuario root
-        /**
-         * password: clave del usuario de la base de datos
-         */
-        'password' => '123456789',
-        /**
-         * test: nombre de la base de datos
-         */
+        'host'     => 'db-mysql-sfo3-58066-do-user-18079590-0.m.db.ondigitalocean.com',
+        'username' => 'doadmin', //no es recomendable usar el usuario root
+        'password' => 'AVNS_6-KQujFcvyFYZv3VV7X',
         'name'     => 'PuntoVenta',
-        /**
-         * type: tipo de motor de base de datos (mysql, pgsql o sqlite)
-         */
         'type'     => 'mysql',
-        /**
-         * charset: Conjunto de caracteres de conexión, por ejemplo 'utf8'
-         */
         'charset'  => 'utf8',
-
-        'port' => '3307',
+        'port' => '25060',
         /**
          * dsn: cadena de conexión a la base de datos
          */
