@@ -66,6 +66,9 @@ define('APP_PATH', dirname(__DIR__).'/app/');
 define('CORE_PATH', dirname(APP_PATH, 2).'/core/');
 //define('URL_APP', 'http://localhost:81/kumbiaphp');
 define('URL_APP', 'https://dolphin-app-3lsom.ondigitalocean.app');
+https://novawear.studio/
+define('URL_APP', 'https://novawear.studio');
+
 //define('URL_APP', ' https://5fa21a1ddc1a8a973a9ca20169fc80c8.serveo.net/kumbiaphp');
 //const CORE_PATH = '/path/to/core/';
 
