@@ -8,7 +8,7 @@ return [
         'host'     => 'db-mysql-sfo3-58066-do-user-18079590-0.m.db.ondigitalocean.com',
         'username' => 'doadmin', //no es recomendable usar el usuario root
         'password' => 'AVNS_6-KQujFcvyFYZv3VV7X',
-        'name'     => 'PuntoVenta',
+        'name'     => 'PuntoVentaKevo',
         'type'     => 'mysql',
         'charset'  => 'utf8',
         'port' => '25060',
