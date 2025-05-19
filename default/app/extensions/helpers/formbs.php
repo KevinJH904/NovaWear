@@ -122,9 +122,10 @@ class Formbs{
 
     public static function btn_cancelar($text = "Cancelar", $attrs = []){}
     public static function btn_regresar($text = "Cancelar", $attrs = []){}
+
     public static function link_regresar($text = "Index", $link="index", $img="📝",$attrs = []) {
         if (strpos($link, '/nueva') !== false) {
-            $text = "↩️ Regresar a " . $text;
+            $text = "↩️ Regresar a " . $text; // ↩️ Regresar a Productos
         }
         else{
             if (strpos($link, '/') !== false) {
