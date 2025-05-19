@@ -30,18 +30,14 @@
         <?= Formbs::seleccion("venta.empleados_id", "Empleado", $empleados)?>
     </div>
     <div class="col-4">
-        <label>Id del cliente </label>
+        <label>Id del Usuario</label>
         <?= Formbs::numero('venta.usuario_id')?>
 
         <label>Id del Metodo de Pago *</label>
         <?= Formbs::seleccion("venta.metodos_pago_id", "Metodo", $metodos)?>
-
     </div>
-
-    <div class="col-4">
-        <label>Fecha *</label>
-        <?= Formbs::fecha('venta.fecha')?>
-    </div>
+       
+        <?= Formbs::fecha(date("d/m/Y"))?>
 </div>
 <br>
 <h3>Campos Extras</h3>
