@@ -74,22 +74,20 @@ class Formbs{
         return Form::date($text, $attrs); // Genera un input type="date"
     }
 
-    public static function fecha2($text = null, $attrs = []) {
-        // Si no se define valor, asignar la fecha actual
-        if (!isset($attrs['value'])) {
-            $attrs['value'] = date("Y-m-d");
+    public static function fechaOculta($valor = null, $attrs = []) {
+        // Si no se pasa un valor, se usa la fecha actual
+        if ($valor === null) {
+            $valor = date("Y-m-d");
         }
 
-        // Unir atributos por defecto con los personalizados
+        // Campo oculto con valor por defecto
         $attrs = array_merge([
-            "class"       => "form-control date",
-            "title"       => "Ingrese Fecha (YYYY-MM-DD)",
-            "pattern"     => "\d{4}-\d{2}-\d{2}",
-            "placeholder" => "YYYY-MM-DD",
-            "required"    => true,
+            "type"  => "hidden",
+            "value" => $valor,
+            "name"  => "fecha" // Ajusta el name según tu modelo o necesidad
         ], $attrs);
 
-        return Form::date($text, $attrs);
+        return Tag::input($attrs);
     }
 
     public static function decimal($text = "Aceptar", $attrs = []){
