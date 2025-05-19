@@ -74,6 +74,24 @@ class Formbs{
         return Form::date($text, $attrs); // Genera un input type="date"
     }
 
+    public static function fecha2($text = null, $attrs = []) {
+        // Si no se define valor, asignar la fecha actual
+        if (!isset($attrs['value'])) {
+            $attrs['value'] = date("Y-m-d");
+        }
+
+        // Unir atributos por defecto con los personalizados
+        $attrs = array_merge([
+            "class"       => "form-control date",
+            "title"       => "Ingrese Fecha (YYYY-MM-DD)",
+            "pattern"     => "\d{4}-\d{2}-\d{2}",
+            "placeholder" => "YYYY-MM-DD",
+            "required"    => true,
+        ], $attrs);
+
+        return Form::date($text, $attrs);
+    }
+
     public static function decimal($text = "Aceptar", $attrs = []){
         // Agregar los atributos por defecto y asegurarse de que acepte números decimales con dos decimales
         $attrs = Formbs::attrsdefaut($attrs, [

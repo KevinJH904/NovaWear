@@ -36,8 +36,11 @@
         <label>Id del Metodo de Pago *</label>
         <?= Formbs::seleccion("venta.metodos_pago_id", "Metodo", $metodos)?>
     </div>
-       
-        <?= Formbs::fecha(date("d/m/Y"))?>
+
+    <div class="col-4">
+        <label>Fecha *</label>
+        <?= Formbs::fecha2(null, ["value" => date("Y-m-d")]) ?>
+    </div>
 </div>
 <br>
 <h3>Campos Extras</h3>
