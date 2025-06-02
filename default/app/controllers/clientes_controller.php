@@ -49,7 +49,6 @@ class ClientesController extends AppController{
         if(Input::hasPost('cliente')){
             $cliente=new Clientes(Input::post('cliente'));
 
-
             if($cliente->create()){
                 Flash::valid("Cliente registrado");
                 Input::delete();

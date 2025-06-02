@@ -98,6 +98,7 @@ class PagosController extends AppController{
 
         $ventasInput = Input::get('ventas'); // ventas[id_venta] => monto
         $comentarioGeneral = Input::get('comentarioGeneral');
+        $this->ComentarioGImprimir = "";
         $primer_venta_id = array_key_first($ventasInput); // obtiene el primer id_venta del array
         $venta_origen = (new Ventas())->find_first((int)$primer_venta_id);
 
@@ -144,6 +145,10 @@ class PagosController extends AppController{
             if ($cliente) {
                 $cliente->aumentar_credito($total_pagado);
             }
+
+            $pagoGuardado = (new Pagos())->find_first($pago->id);
+            $this->ComentarioGImprimir = $pagoGuardado->comentario ?? "Sin comentario";
+
 
         }
 
