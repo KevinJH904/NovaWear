@@ -36,6 +36,16 @@
             <label>Comentario General:  </label>
             <input name="comentarioGeneral" type="text">
         </div>
+        <div class="col-2">
+            <label>Método de Pago *</label>
+
+            <!-- Options -->
+            <select id="single" name="Metodo">
+                <?php foreach ($metodos as $m):?>
+                    <option value="<?=$m->id?>"><?=$m->nombre?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
     </div>
 
     <br><br>

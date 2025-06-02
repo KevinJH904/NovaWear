@@ -71,6 +71,7 @@ class PagosController extends AppController{
         $this->cliente = (new Clientes())->find($cliente_id);
         $credito_disponible = $this->cliente->credito;
         $ventas = Input::get("ventas");
+        $metodo = Input::get("Metodo");
         //venta[4]=100
         $this->ventas_a_pagar = [];
         $this->total_a_abonar = 0;
@@ -126,7 +127,7 @@ class PagosController extends AppController{
         // Creamos el registro en la tabla PAGOS
         $pago = new Pagos();
         $pago->ventass_id = $primer_venta_id;
-        $pago->metodo_pago_id = $metodo_pago_id;
+        $pago->metodo_pago_id = $metodo;
         $pago->total = $total_pagado;
         $pago->comentario = $comentarioGeneral;
 
