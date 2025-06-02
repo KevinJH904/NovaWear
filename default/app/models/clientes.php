@@ -19,7 +19,7 @@ class Clientes extends ActiveRecord{
         $this->validates_length_of('telefono', '10', '10');
         $this->validates_length_of('password', '40', '8');
 
-        $this->validates_email_in("email");
+        //$this->validates_email_in("email");
 
         $this->validates_numericality_of("credito");
         $this->validates_numericality_of("adeudo");
@@ -33,21 +33,69 @@ class Clientes extends ActiveRecord{
         (new Clientes())->sql($sql3);
     }
 
+    public function aumentar_credito($monto) {
+        // Validar que el monto sea positivo
+        if ($monto > 0) {
+            $this->credito += $monto;
+            $this->save();
+        }
+    }
+
     public function linea_credito(){
-        //return ($this->credito +$this->adeudo);
-        //$sql2="UPDATE clientes SET credito = credito - adeudo";
-        //Resta del adeudo al crédito
-        $sql2= "UPDATE clientes SET credito = GREATEST(0, credito - adeudo)";
+//        //return ($this->credito +$this->adeudo);
+//        //$sql2="UPDATE clientes SET credito = credito - adeudo";
+//        //Resta del adeudo al crédito
+//
+//        $sql2= "UPDATE clientes SET credito = GREATEST(0, credito - adeudo)";
+//
+//        (new Clientes())->sql($sql2);
+//
+//        //$this->limpiarAdeudo();
 
-        (new Clientes())->sql($sql2);
+        $venta = (new Ventas())->find_first("conditions: clientes_id = {$this->id}", "order: id DESC");
 
-        $this->limpiarAdeudo();
+        if ($venta) {
+            $por_pagar = $venta->por_pagar;
+
+            // Actualizar el crédito restando solo el último por_pagar
+            $nuevo_credito = max(0, $this->credito - $por_pagar);
+
+            // Guardar el nuevo crédito
+            $this->credito = $nuevo_credito;
+            $this->save();
+        }
 
     }
 
     public function update_credito(){
         //$this->id
         $sql= "UPDATE clientes c SET adeudo = (SELECT SUM(por_pagar) FROM ventas v WHERE v.clientes_id = c.id AND por_pagar > 0 AND estado = 'finalizada') WHERE c.id = {$this->id}";
+
+        (new Clientes())->sql($sql);
+    }
+
+    public function update_credito2(){
+        //$this->id
+        $sql= "UPDATE clientes c SET adeudo = (SELECT SUM(por_pagar) FROM ventas v WHERE v.clientes_id = c.id AND por_pagar > 0 AND estado = 'finalizada') WHERE c.id = {$this->id}";
+
+        (new Clientes())->sql($sql);
+    }
+
+    public function update_adeudo($cliente_id, $total_pagado)
+    {
+        $sql = "
+        UPDATE clientes c
+        SET
+        c.adeudo = (
+        SELECT IFNULL(SUM(v.por_pagar), 0)
+        FROM ventas v
+        WHERE v.clientes_id = {$cliente_id}
+        AND v.por_pagar > 0
+        AND v.estado = 'finalizada'
+        ),
+        c.credito = c.credito - {$total_pagado}
+        WHERE c.id = {$cliente_id}
+        ";
 
         (new Clientes())->sql($sql);
     }
