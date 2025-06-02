@@ -23,7 +23,7 @@ class VentasController extends AppController{
             $this->cliente = (new Clientes())->find($cliente_id);
             $this->Vent = (new Ventas())->find_first("clientes_id = $cliente_id AND estado = 'carrito'");
             //$this->Real="";
-            $this->totalTemp = round((new detalles_ventas())->sum("importe", "conditions: ventas_id = {$this->Vent->id}"), 2);
+            $this->totalTemp = round((new detalles_ventas())->sum("importe", "conditions: ventas_id = {$this->Vent->id}") ?? 0, 2);
 
             $bandera=false;
             if($this->Vent->estado==="carrito" and $bandera==false){
