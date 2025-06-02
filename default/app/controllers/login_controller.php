@@ -16,7 +16,7 @@ class LoginController extends Controller{
             if ($auth->authenticate()) {
                 // Si el usuario es valido, lo mandamos al index
                 // de la aplicacion ya logueado
-                Redirect::to("ventas/index");
+                Redirect::to("index");
 
                 return false;
             } else {
