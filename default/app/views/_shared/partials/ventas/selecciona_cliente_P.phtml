@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-8">
+        <form>
+            <label class="control-label">Cliente:</label>
+            <div class="row">
+                <div class="col-4">
+                    <select name="cliente" class="form-control" id="single">
+                        <?php foreach ($clientes as $c): ?>
+                            <option value="<?=$c->id?>"><?=$c->nombre?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="col-1">
+                    <button class="btn btn-success">Seleccionar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
