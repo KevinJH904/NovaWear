@@ -8,6 +8,8 @@ class metodospago extends ActiveRecord{
          */
         $this->has_many('ventas', 'model: Ventas', 'fk: metodos_pago_id');
 
+        $this->has_many('pagosM', 'model: pagos', 'fk: metodo_pago_id');
+
         //Validaciones
         $this->validates_presence_of("nombre"); // El campo no puede ser nulo
         $this->validates_length_of('nombre', '25', '5');

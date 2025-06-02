@@ -33,7 +33,7 @@
                 <?= Html::link("ventas/ver/{$p->id}", "Ver", ["title" => "Ir a la venta.."]) ?>
             </td>
             <td><?= $p->getVc()->getCliente()->nombre?></td>
-            <td><?= $p->getVc()->getMetodoP()->nombre?></td>
+            <td><?= $p->getVm()->nombre?></td>
             <td><?= $p->total?></td>
             <td><?= $p->comentario?></td>
 

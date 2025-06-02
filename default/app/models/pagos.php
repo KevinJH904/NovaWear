@@ -12,7 +12,7 @@ class pagos extends ActiveRecord
          */
 
         $this->belongs_to('Vc', 'model: Ventas', 'fk: ventass_id');
-        $this->belongs_to('Vm', 'model: Ventas', 'fk: metodo_pago_id');
+        $this->belongs_to('Vm', 'model: metodospago', 'fk: metodo_pago_id');
 
         $this->has_many('items', 'model: pagositems', 'fk: pago_id');
     }

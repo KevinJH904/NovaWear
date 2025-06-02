@@ -149,6 +149,7 @@ class PagosController extends AppController{
 
             $pagoGuardado = (new Pagos())->find_first($pago->id);
             $this->ComentarioGImprimir = $pagoGuardado->comentario ?? "Sin comentario";
+            $this->MetodoPagoImprimir = $pagoGuardado->getVm()->nombre;
 
 
         }

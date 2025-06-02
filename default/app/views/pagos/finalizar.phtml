@@ -1,3 +1,23 @@
+
+
+
+
+
+<div class="row">
+    <div class="col-3">
+        <?=View::partial("pagos/Card_Comentario", null,["ComentarioGImprimir" => $ComentarioGImprimir, "MetodoPagoImprimir"=>$MetodoPagoImprimir])?>
+    </div>
+
+    <div class="col-1">
+        <?= Formbs::link_regresar("Pagos",  "pagos"); ?>
+    </div>
+    <div class="col-1">
+        <?= Formbs::link_abonar("Abonar",  $cliente->id, "💰"); ?>
+    </div>
+</div>
+
+<br>
+
 <h1>Total abonado: $<?=number_format(max(0, $total_a_abonar),2)?></h1>
 
 <table class="table table-sm table-hover">
@@ -28,21 +48,12 @@
     </tbody>
 </table>
 <br>
-<div class="row">
-    <div class="col-3">
-        <?=View::partial("pagos/Card_Comentario", null,["ComentarioGImprimir" => $ComentarioGImprimir])?>
-    </div>
-</div>
+
 
 <br>
 <br>
 <div class="row">
-    <div class="col-1">
-        <?= Formbs::link_regresar("Pagos",  "pagos"); ?>
-    </div>
-    <div class="col-1">
-        <?= Formbs::link_abonar("Abonar",  $cliente->id, "💰"); ?>
-    </div>
+
 </div>
 
 <br>
