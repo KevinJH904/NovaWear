@@ -77,7 +77,7 @@
                     <td><?= $v-> getProducto()->nombre?></td> <!--getClientes()-->
 
                     <td><?= $v-> cantidad?></td>
-                    <td><?= $v-> subtotal?></td>
+                    <td><?= $v-> importe?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -115,7 +115,7 @@
                                 <h5 class="text-primary text-uppercase mb-1">
                                     Estado de la Venta:</h5>
                                 <br>
-                                <h4 class="card-title"><?= $ventas->cancelado ? 'Activo' : 'Cancelado' ?></h4>
+                                <h4 class="card-title"><?= $ventas->cancelada ? 'Activo' : 'Cancelado' ?></h4>
 
                             </div>
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>

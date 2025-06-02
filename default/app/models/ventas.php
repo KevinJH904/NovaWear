@@ -15,22 +15,27 @@ class Ventas extends ActiveRecord{
         $this->belongs_to('vendedor', 'model: empleados', 'fk: empleados_id');
         $this->belongs_to('metodoP', 'model: metodospago', 'fk: metodos_pago_id');
         $this->has_many('detalleventa', 'model: detalles_ventas', 'fk: ventas_id');
+        $this->has_many('items', 'model: pagositems', 'fk: venta_id');
+        $this->has_many('pagosC', 'model: pagos', 'fk: ventass_id');
+        $this->has_many('pagosM', 'model: pagos', 'fk: metodo_pago_id');
+
+
 
         //Validaciones
-//        $this->validates_presence_of("clientes_id"); // El campo no puede ser nulo
-//        $this->validates_presence_of("empleados_id"); // El campo no puede ser nulo
-//        $this->validates_presence_of("metodos_pago_id"); // El campo no puede ser nulo
-//        $this->validates_presence_of("fecha"); // El campo no puede ser nulo
+        $this->validates_presence_of("clientes_id"); // El campo no puede ser nulo
+        $this->validates_presence_of("empleados_id"); // El campo no puede ser nulo
+        $this->validates_presence_of("metodos_pago_id"); // El campo no puede ser nulo
+        $this->validates_presence_of("fecha"); // El campo no puede ser nulo
 //        $this->validates_presence_of("total"); // El campo no puede ser nulo
 //        $this->validates_presence_of("por_pagar"); // El campo no puede ser nulo
-//        $this->validates_presence_of("comentario"); // El campo no puede ser nulo
+        $this->validates_presence_of("comentario"); // El campo no puede ser nulo
 //        $this->validates_presence_of("cancelada"); // El campo no puede ser nulo
 
         //Rangos
         $this->validates_length_of('cancelada', '1');
         $this->validates_length_of('comentario', '80', '1');
 
-        $this->validates_date_in("fecha");
+        //$this->validates_date_in("fecha");
 
 
     }
@@ -66,11 +71,11 @@ class Ventas extends ActiveRecord{
                 // Si ya existe, incrementamos la cantidad en 1
                 $detalles = new detalles_ventas();
                 $sql = "UPDATE detalles_ventas 
-                        SET cantidad = cantidad + 1, 
-                            importe = (cantidad + 1) * unitario 
+                        SET cantidad = cantidad + $cantidad, 
+                            importe = (cantidad) * unitario 
                         WHERE ventas_id = $venta_id AND productos_id = {$producto->id}";
                 $detalles->sql($sql);
-                $producto->bajastock($producto->id, 1);
+                $producto->bajastock($producto->id, $cantidad, 1);
             } else {
                 // Si no existe, creamos uno nuevo
                 $item = new detalles_ventas();
@@ -81,7 +86,26 @@ class Ventas extends ActiveRecord{
                 $item->save();
 
                 // Actualizar el stock solo en nuevo item
-                $producto->bajastock($item->productos_id, $item->cantidad);
+                $producto->bajastock($item->productos_id, $item->cantidad, 1);
+            }
+        }
+    }
+
+    public function remove_item2($producto, $cantidad, $venta_id) {
+        if ($this->estado === "carrito") {
+            // Verificar si ya existe ese producto en el carrito
+            $detalle_existente = (new detalles_ventas())->find_first("ventas_id = $venta_id AND productos_id = {$producto->id}");
+
+            if ($detalle_existente) {
+                //$this->hola="Existe ya una venta con ese producto";
+                // Si ya existe, incrementamos la cantidad en 1
+                $detalles = new detalles_ventas();
+                $sql = "UPDATE detalles_ventas 
+                    SET cantidad = GREATEST(cantidad - $cantidad, 0), 
+                        importe = GREATEST(cantidad - $cantidad, 0) * unitario 
+                    WHERE ventas_id = $venta_id AND productos_id = {$producto->id}";
+                $detalles->sql($sql);
+                $producto->bajastock($producto->id, $cantidad, 0);
             }
         }
     }
@@ -131,11 +155,15 @@ class Ventas extends ActiveRecord{
                 $this->por_pagar = $this->total;
             }
 
+            //quitar esta linea para que vuelva a la normalidad por se forma_pago PPD
+            //$this->por_pagar = $this->total;
+
             //guardar
             $this->save();
             //Se quita set_total ya que ya lo ocupamos desde indexcontroller al usar pagar()
             $this->set_total();
             $this->getCliente()->update_credito();
+            $this->getCliente()->linea_credito();
         //}
 
 
@@ -175,6 +203,7 @@ class Ventas extends ActiveRecord{
      * AND STATUS = 'finalizada'
      */
 
+    //clientes que le falta pagar goty para la seleccion de usuarios
     public function por_pagar($cliente_id){
         return (new Ventas())->find("clientes_id = {$cliente_id}
                                    AND por_pagar > 0

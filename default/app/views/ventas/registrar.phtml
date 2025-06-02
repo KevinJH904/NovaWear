@@ -23,51 +23,41 @@
 
 <div class="row">
     <div class="col-4">
-        <label>Id del cliente *</label>
+        <label>Cliente *</label>
         <?= Formbs::seleccion("venta.clientes_id", "Cliente", $clientes)?>
+        <br>
 
-        <label>Id del empleado *</label>
-        <?= Formbs::seleccion("venta.empleados_id", "Empleado", $empleados)?>
+        <label>Empleado *</label>
+        <?= Formbs::seleccionemp("venta.empleados_id", "Empleado", $empleados)?>
+
+        <?= Formbs::total("venta.total",null,0)?>
+        <?= Formbs::total("venta.por_pagar",null,0)?>
+        <?= Formbs::total("venta.cancelada",null,1)?>
     </div>
     <div class="col-4">
-        <label>Id del Usuario</label>
-        <?= Formbs::numero('venta.usuario_id')?>
+        <?= Formbs::numeroUS('venta.usuario_id')?>
 
         <label>Id del Metodo de Pago *</label>
         <?= Formbs::seleccion("venta.metodos_pago_id", "Metodo", $metodos)?>
+
+        <br>
+
+        <label>Fecha *</label>
+        <?= Formbs::fecha('venta.fecha', null, date("Y-m-d")) ?>
     </div>
 
     <div class="col-4">
-        <label>Fecha *</label>
-        <?= Formbs::fechaOculta() ?>
+
+        <label>Comentario</label>
+        <?= Formbs::txt('venta.comentario', null, 1)?>
     </div>
 </div>
 <br>
-<h3>Campos Extras</h3>
-
-<div class="row">
-    <div class="col-4">
-        <label>Total</label>
-        <?= Formbs::numeroDouble('venta.total')?>
-
-
-        <label>Por Pagar</label>
-        <?= Formbs::numeroDouble('venta.por_pagar')?>
-    </div>
-
-    <div class="col-4">
-        <label>Comentario</label>
-        <?= Formbs::txt('venta.comentario')?>
-
-
-        <label>cancelada</label>
-        <?= Formbs::numero('venta.cancelada')?>
-    </div>
-
-</div>
 
 <?php View::content(); ?>
 <br>
 <?= View::partial("botones/Btn_Form", null)?>
 
 <?= Form::close() ?>
+
+
