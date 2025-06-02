@@ -1,4 +1,4 @@
-<h1>Total a abonar: $<?=number_format($total_a_abonar)?></h1>
+<h1>Total abonado: $<?=number_format(max(0, $total_a_abonar),2)?></h1>
 
 <table class="table table-sm table-hover">
     <thead>
@@ -8,7 +8,7 @@
         <th>Total</th>
         <th>Abonado</th>
         <th>Por Pagar</th>
-        <th>A Pagar</th>
+        <th>Comentario Por Venta</th>
     </tr>
     </thead>
 
@@ -18,12 +18,27 @@
             <td><?=$v->id?></td>
             <td><?=$v->created_at?></td>
             <td><?=($v->total)?></td>
-            <td><?=($v->total - $v->por_pagar)?></td>
-            <td><?=$v->por_pagar?></td>
             <td><?=$v->a_abonar?></td>
+            <td><?= number_format(max(0, $v->por_pagar), 2) ?></td>
+            <td><?=$v->comentario?></td>
         </tr>
 
-    <?php endforeach; ?>
+        <?php endforeach; ?>
 
     </tbody>
 </table>
+<br>
+<br>
+<div class="row">
+    <div class="col-1">
+        <?= Formbs::link_regresar("Pagos",  "pagos"); ?>
+    </div>
+    <div class="col-1">
+        <?= Formbs::link_abonar("Abonar",  $cliente->id, "💰"); ?>
+    </div>
+</div>
+
+<br>
+
+
+
