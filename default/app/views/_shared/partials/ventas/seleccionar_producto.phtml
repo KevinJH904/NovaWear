@@ -1,5 +1,6 @@
 <form method="post">
     <label class="control-label">Producto</label>
+    <label class="control-label" style="margin-left: 42%">Cantidad</label>
     <div class="row">
         <div class="col-6">
             <select name="producto_id" class="form-control" id="single">
@@ -8,8 +9,19 @@
                 <?php endforeach; ?>
             </select>
         </div>
+        <div class="col-2">
+            <input type="number" name="cantidad" id="single" class="form-control" value="1" min="1">
+        </div>
         <div class="col-1">
-            <button class="btn btn-success">Seleccionar</button>
+            <button type="submit" name="accion" value="agregar" class="btn btn-success">Agregar</button>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-2">
+            <button type="submit" name="accion" value="eliminar" class="btn btn-danger">Eliminar</button>
+        </div>
+        <div class="col-9"></div>
+        <div class="col-3" style="margin-top: 50px">
+            <button type="submit" name="accion" value="pagar" class="btn btn-info">Ir a pagar</button>
         </div>
     </div>
 </form>
