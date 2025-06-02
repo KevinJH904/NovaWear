@@ -9,8 +9,9 @@ class IndexController extends AppController
 
     public function index()
     {
+
         //$this -> title="Inicio";
-        //$this -> subtitle="Dashboard";
+        $this -> subtitle="Nova Wear por Kevin Jacobo Hernández";
 
 //        //Algoritmo para la actualización de datos
 //        $this->venta = (new Ventas())->find(19);
