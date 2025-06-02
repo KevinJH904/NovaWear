@@ -7,7 +7,7 @@
 <?php if($cliente == null): ?>
 
 
-    <?= View::partial("ventas/seleccionar_cliente", null, ["clientes" => $AllClientes])?>
+    <?= View::partial("ventas/selecciona_cliente_Ca", null, ["clientes" => $VentAllCarrito])?>
 
 <?php endif; ?>
 
@@ -15,31 +15,40 @@
     <div class="row">
         <div class="col-1">
             <h2>Acciones</h2>
-            <?= Formbs::link_regresar("Nueva",  "ventas/nueva"); ?>
+            <?= Formbs::link_regresar2("Carrito",  "ventas/nueva"); ?>
         </div>
         <div class="col-4">
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-11">
-                    <?= View::partial("ventas/card_cliente", null, ["cliente" => $cliente])?>
+                    <?= View::partial("ventas/card_carrito", null, ["ultimaVenta" => $ultimaVenta, "totalTemp" => $totalTemp])?>
                 </div>
             </div>
         </div>
 
     </div>
 <br>
-
-
-
 <div class="row">
         <!--Formulario-->
         <div class="col-5">
-            <?= View::partial("ventas/seleccionar_producto", null, ["AllProductos" => $AllProductos])?>
+            <div class="row">
+                <div class="col-12">
+                    <?= View::partial("ventas/seleccionar_producto", null, ["AllProductos" => $AllProductos])?>
+                </div>
+
+
+            </div>
         </div>
 <?php endif; ?>
     <!--Tabla -->
     <div class="col-7">
         <?= View::partial("ventas/Tabla_Comp", null, ["venta" => $venta])?>
     </div>
+
+
 </div>
+
+<?=View::content()?>
+
+
 
